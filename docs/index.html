@@ -5,14 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Medical Appointment Scheduler - Demo</title>
     <meta name="description" content="Talk to Riley, an AI receptionist that helps schedule medical appointments">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
         :root {
             --primary: #14B8A6;
-            --bg: #0a0a0a;
+            --primary-dark: #0D9488;
+            --bg: #040404;
             --text: #ffffff;
-            --muted: #a0aec0;
-            --card-bg: rgba(26, 32, 44, 0.8);
+            --muted: #94A3B8;
+            --card-bg: rgba(17, 24, 39, 0.7);
             --border: rgba(20, 184, 166, 0.2);
+            --gradient-start: rgba(20, 184, 166, 0.15);
+            --gradient-end: rgba(20, 184, 166, 0.02);
         }
 
         * {
@@ -22,15 +28,16 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background: radial-gradient(circle at top right, rgba(20, 184, 166, 0.15), transparent 800px),
-                        radial-gradient(circle at bottom left, rgba(20, 184, 166, 0.1), transparent 800px);
+            background: radial-gradient(circle at top right, var(--gradient-start), transparent 800px),
+                        radial-gradient(circle at bottom left, var(--gradient-start), transparent 800px),
+                        radial-gradient(circle at center, var(--gradient-end), transparent 400px);
         }
 
         .container {
@@ -43,69 +50,122 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            position: relative;
         }
 
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
+            border-radius: 24px;
+            padding: 3rem;
             margin: 2rem 0;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            max-width: 900px;
             width: 100%;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
+            font-weight: 700;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text), var(--primary));
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            position: relative;
         }
 
         .subtitle {
             color: var(--muted);
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            font-weight: 400;
         }
 
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
         }
 
         .feature {
-            padding: 1rem;
+            padding: 2rem;
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 16px;
+            background: rgba(20, 184, 166, 0.03);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
             background: rgba(20, 184, 166, 0.05);
+            border-color: var(--primary);
+        }
+
+        .feature i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
         }
 
         .feature h3 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 600;
         }
 
         .feature p {
             color: var(--muted);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         .instructions {
             text-align: left;
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            border: 1px solid var(--border);
         }
 
         .instructions h2 {
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
 
         .instructions ol {
@@ -114,7 +174,37 @@
         }
 
         .instructions li {
-            margin: 0.5rem 0;
+            margin: 1rem 0;
+            padding-left: 0.5rem;
+            position: relative;
+        }
+
+        .instructions li::marker {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(20, 184, 166, 0.1);
+            border: 1px solid var(--border);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            color: var(--primary);
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            background: rgba(20, 184, 166, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .tech-stack {
+            margin: 2rem 0;
         }
 
         footer {
@@ -122,15 +212,52 @@
             padding: 2rem;
             color: var(--muted);
             font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.2);
+            margin-top: 2rem;
+            width: 100%;
         }
 
         footer a {
             color: var(--primary);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         footer a:hover {
+            color: var(--primary-dark);
             text-decoration: underline;
+        }
+
+        .pulse {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+            right: 20px;
+            top: 20px;
+        }
+
+        .pulse::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
         }
 
         @media (max-width: 768px) {
@@ -139,10 +266,18 @@
             }
 
             h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
             .card {
+                padding: 2rem 1.5rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .feature {
                 padding: 1.5rem;
             }
         }
@@ -151,38 +286,49 @@
 <body>
     <div class="container">
         <div class="card">
-            <h1>AI Medical Appointment Scheduler</h1>
-            <p class="subtitle">Talk to Riley, your AI receptionist, to schedule your next medical appointment</p>
+            <div class="pulse"></div>
+            <h1>AI Medical Scheduler</h1>
+            <p class="subtitle">Experience the future of medical appointment booking with Riley, your AI receptionist powered by cutting-edge voice technology</p>
+
+            <div class="tech-stack">
+                <span class="badge"><i class="fas fa-microphone"></i>Vapi.ai</span>
+                <span class="badge"><i class="fas fa-brain"></i>GPT-4</span>
+                <span class="badge"><i class="fas fa-wave-square"></i>Deepgram Nova-3</span>
+                <span class="badge"><i class="fas fa-clock"></i>Real-time</span>
+            </div>
 
             <div class="features">
                 <div class="feature">
+                    <i class="fas fa-comments"></i>
                     <h3>Natural Conversation</h3>
-                    <p>Powered by GPT-4 for human-like interaction</p>
+                    <p>Talk naturally with Riley just like you would with a human receptionist</p>
                 </div>
                 <div class="feature">
-                    <h3>Quick Booking</h3>
-                    <p>Schedule appointments in minutes</p>
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Smart Scheduling</h3>
+                    <p>Book appointments efficiently with intelligent time slot suggestions</p>
                 </div>
                 <div class="feature">
-                    <h3>Instant Confirmation</h3>
-                    <p>Get your booking code immediately</p>
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure & Private</h3>
+                    <p>Your conversations are handled with the highest privacy standards</p>
                 </div>
             </div>
 
             <div class="instructions">
-                <h2>How to Use</h2>
+                <h2><i class="fas fa-play-circle"></i>How to Use</h2>
                 <ol>
-                    <li>Click the "Start" button in the bottom-right corner</li>
-                    <li>Allow microphone access when prompted</li>
+                    <li>Click the "Start" button in the bottom-right corner of this page</li>
+                    <li>Allow microphone access when prompted by your browser</li>
                     <li>Speak naturally with Riley to schedule your appointment</li>
-                    <li>Receive your confirmation code</li>
+                    <li>Receive your unique confirmation code and appointment details</li>
                 </ol>
             </div>
         </div>
     </div>
 
     <footer>
-        Built with ❤️ by <a href="https://github.com/mohitpatni" target="_blank">Mohit Patni</a> using <a href="https://vapi.ai" target="_blank">Vapi.ai</a>
+        <p>Built with <i class="fas fa-heart" style="color: var(--primary);"></i> by <a href="https://github.com/mohitpatni" target="_blank">Mohit Patni</a> using <a href="https://vapi.ai" target="_blank">Vapi.ai</a></p>
     </footer>
 
     <!-- Vapi Widget -->
