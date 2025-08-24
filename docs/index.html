@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Medical Appointment Scheduler - Demo</title>
+    <meta name="description" content="Talk to Riley, an AI receptionist that helps schedule medical appointments">
+    <style>
+        :root {
+            --primary: #14B8A6;
+            --bg: #0a0a0a;
+            --text: #ffffff;
+            --muted: #a0aec0;
+            --card-bg: rgba(26, 32, 44, 0.8);
+            --border: rgba(20, 184, 166, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: radial-gradient(circle at top right, rgba(20, 184, 166, 0.15), transparent 800px),
+                        radial-gradient(circle at bottom left, rgba(20, 184, 166, 0.1), transparent 800px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature {
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: rgba(20, 184, 166, 0.05);
+        }
+
+        .feature h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature p {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .instructions {
+            text-align: left;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        .instructions h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .instructions ol {
+            margin-left: 1.5rem;
+            color: var(--muted);
+        }
+
+        .instructions li {
+            margin: 0.5rem 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>AI Medical Appointment Scheduler</h1>
+            <p class="subtitle">Talk to Riley, your AI receptionist, to schedule your next medical appointment</p>
+
+            <div class="features">
+                <div class="feature">
+                    <h3>Natural Conversation</h3>
+                    <p>Powered by GPT-4 for human-like interaction</p>
+                </div>
+                <div class="feature">
+                    <h3>Quick Booking</h3>
+                    <p>Schedule appointments in minutes</p>
+                </div>
+                <div class="feature">
+                    <h3>Instant Confirmation</h3>
+                    <p>Get your booking code immediately</p>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h2>How to Use</h2>
+                <ol>
+                    <li>Click the "Start" button in the bottom-right corner</li>
+                    <li>Allow microphone access when prompted</li>
+                    <li>Speak naturally with Riley to schedule your appointment</li>
+                    <li>Receive your confirmation code</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Built with ❤️ by <a href="https://github.com/mohitpatni" target="_blank">Mohit Patni</a> using <a href="https://vapi.ai" target="_blank">Vapi.ai</a>
+    </footer>
+
+    <!-- Vapi Widget -->
+    <vapi-widget
+        public-key="4ad11a04-a06c-47cd-b346-5a6fb62b2e03"
+        assistant-id="ab41db04-53da-43bf-ba19-3b0a0e98ff46"
+        mode="voice"
+        theme="dark"
+        base-bg-color="#000000"
+        accent-color="#14B8A6"
+        cta-button-color="#000000"
+        cta-button-text-color="#ffffff"
+        border-radius="large"
+        size="full"
+        position="bottom-right"
+        title="Talk with our customer care agent to book your healthcare appointment"
+        start-button-text="Start"
+        end-button-text="End Call"
+        chat-first-message="Hey, How can I help you today?"
+        chat-placeholder="Type your message..."
+        voice-show-transcript="true"
+        consent-required="true"
+        consent-title="Terms and conditions"
+        consent-content='By clicking "Agree," and each time I interact with this AI agent, I consent to the recording, storage, and sharing of my communications with third-party service providers, and as otherwise described in our Terms of Service.'
+        consent-storage-key="vapi_widget_consent"
+    ></vapi-widget>
+
+    <script src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js" async type="text/javascript"></script>
+</body>
+</html>
