@@ -49,8 +49,14 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
             position: relative;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            width: 100%;
         }
 
         .card {
@@ -91,20 +97,95 @@
         h1 {
             font-size: 3.5rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             line-height: 1.2;
             background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             position: relative;
+            text-align: center;
         }
 
         .subtitle {
             color: var(--muted);
             font-size: 1.25rem;
             margin-bottom: 3rem;
-            max-width: 600px;
+            max-width: 700px;
             font-weight: 400;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(20, 184, 166, 0.05));
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.1), transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(20, 184, 166, 0.3);
+        }
+
+        .cta-button i {
+            font-size: 1.2rem;
         }
 
         .features {
@@ -205,6 +286,10 @@
 
         .tech-stack {
             margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         footer {
@@ -265,8 +350,35 @@
                 padding: 1rem;
             }
 
+            .hero-section {
+                margin-bottom: 2rem;
+            }
+
             h1 {
                 font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+
+            .cta-section {
+                padding: 2rem 1.5rem;
+                margin: 2rem 0;
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
+
+            .cta-description {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
             }
 
             .card {
@@ -275,28 +387,54 @@
 
             .features {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
             .feature {
                 padding: 1.5rem;
+            }
+
+            .tech-stack {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .badge {
+                margin: 0.25rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="card">
+        <!-- Hero Section -->
+        <div class="hero-section">
             <div class="pulse"></div>
             <h1>AI Medical Scheduler</h1>
             <p class="subtitle">Experience the future of medical appointment booking with Riley, your AI receptionist powered by cutting-edge voice technology</p>
-
+            
             <div class="tech-stack">
                 <span class="badge"><i class="fas fa-microphone"></i>Vapi.ai</span>
                 <span class="badge"><i class="fas fa-brain"></i>GPT-4</span>
                 <span class="badge"><i class="fas fa-wave-square"></i>Deepgram Nova-3</span>
                 <span class="badge"><i class="fas fa-clock"></i>Real-time</span>
             </div>
+        </div>
 
+        <!-- Talk with Agent Section -->
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2 class="cta-title">Talk with Our Agent</h2>
+                <p class="cta-description">Start a conversation with Riley now and experience AI-powered appointment scheduling</p>
+                <button class="cta-button" onclick="document.querySelector('vapi-widget').click()">
+                    <i class="fas fa-microphone"></i>
+                    Start Conversation
+                </button>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="card">
             <div class="features">
                 <div class="feature">
                     <i class="fas fa-comments"></i>
@@ -318,7 +456,7 @@
             <div class="instructions">
                 <h2><i class="fas fa-play-circle"></i>How to Use</h2>
                 <ol>
-                    <li>Click the "Start" button in the bottom-right corner of this page</li>
+                    <li>Click the "Start Conversation" button above or use the widget in the bottom-right corner</li>
                     <li>Allow microphone access when prompted by your browser</li>
                     <li>Speak naturally with Riley to schedule your appointment</li>
                     <li>Receive your unique confirmation code and appointment details</li>
