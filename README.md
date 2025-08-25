@@ -7,8 +7,7 @@ A voice-powered AI receptionist that helps schedule medical appointments natural
 Try the live demo here: [AI Medical Scheduler Demo](https://mohitpatni0731.github.io/AI-calling-agent)
 
 **🔗 Shareable Link**: https://mohitpatni0731.github.io/AI-calling-agent
-
-[![Demo Preview](docs/assets/demo-preview.png)](https://mohitpatni0731.github.io/AI-calling-agent)
+**🔗 Demo video Link**: https://drive.google.com/file/d/11mpgFHwHV5ml7grLgGGBc1xJ2bt9zqt-/view?usp=sharing
 
 ## 🤖 Meet Riley - Your AI Receptionist
 
